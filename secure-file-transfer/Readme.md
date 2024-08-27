@@ -1,7 +1,6 @@
 # Secure File Transfer
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
-![Cryptography](https://img.shields.io/badge/Cryptography-PyCryptodome-yellow)
 
 ## Overview
 
@@ -28,12 +27,3 @@ This project is suitable for scenarios where sensitive files need to be transfer
 - **TQDM** for progress bars
 - **Argparse** for command-line argument parsing
 - **Logging** for debugging and monitoring
-
-## Project Structure
-```plaintext
-.
-├── constants.py               # Constants used in the project
-├── helper_functions.py        # Helper functions for encryption, decryption, and key management
-├── client.py                  # Client-side implementation
-├── server.py                  # Server-side implementation
-└── README.md  
