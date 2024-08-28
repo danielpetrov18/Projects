@@ -19,15 +19,7 @@ To get started with the Audio Translator application, follow these steps:
 2. **AssemblyAI API Key:** Sign up on the [AssemblyAI website](https://www.assemblyai.com/) to generate an API key. This API key is required for the speech-to-text and text-to-speech functionalities.
 
 ### Setup
-
-1. **Clone the Repository:**
-
-    ```bash
-    git clone <your-repository-url>
-    cd <your-project-directory>
-    ```
-
-2. **Configure API Key:**
+1. **Configure API Key:**
 
     Open the `docker-compose.yml` file and set your AssemblyAI API key:
 
