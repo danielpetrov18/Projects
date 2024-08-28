@@ -1,11 +1,12 @@
-import sys
-from helper_functions import audio_to_translated_audio
+import gradio as gr
+from gradio_interface import create_gradio_interface
 
-if __name__ == "__main__":
-  filename = sys.argv[1]	
-  extension = sys.argv[2]
-  to_code = sys.argv[3]
-  out_filepath = sys.argv[4]
-  
-  audio_to_translated_audio(f'{filename}.{extension}', to_code=to_code, out_filepath=out_filepath)
-  
+if __name__ == '__main__':
+    translator_app = create_gradio_interface()
+    
+    try:
+        translator_app.launch(server_name='0.0.0.0', server_port=7860)
+    except gr.Error as gre:
+        print(f'Gradio error: {gre}')
+    except Exception as e:
+        print(f'Unexpected error: {e}')

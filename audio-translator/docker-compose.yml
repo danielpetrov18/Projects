@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  audio-translator:
+    build: .
+    container_name: audio-translator
+    ports:
+      - '7860:7860'
+    environment:
+      - ASSEMBLY_AI_KEY=61d0225692ee4d92b8e4f57e054f3550   # TODO: add your own API key here 
+    restart: always

@@ -1,0 +1,74 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+env/
+.virtualenv/
+*.env
+
+# Ignore test and coverage results
+.coverage
+*.cover
+*.py,cover
+.cache
+nosetests.xml
+coverage.xml
+*.log
+
+# Ignore PyInstaller artifacts
+dist/
+build/
+*.spec
+
+# Ignore environment files
+*.env
+*.env.*
+.envrc
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Django specific files
+*.sqlite3
+*.db
+migrations/
+
+# Ignore compiled C extensions
+*.so
+
+# Ignore static and media files (Django specific)
+staticfiles/
+media/
+
+# Ignore local development settings
+settings_local.py
+
+# Ignore sensitive information
+secrets.json
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore IDE project files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore Docker related files
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose.*
+
+# Ignore package management files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Readme 
+Readme.md
+Readme.*
