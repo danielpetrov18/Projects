@@ -72,3 +72,6 @@ pip-delete-this-directory.txt
 # Readme 
 Readme.md
 Readme.*
+
+# Modules
+requirements.txt
