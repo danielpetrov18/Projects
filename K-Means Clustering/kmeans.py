@@ -1,37 +1,32 @@
 import numpy as np
-import pandas as pd
+from helpers import get_labels, generate_centroids, plot_with_pca
 
-def load_data(path='pokemon.csv', features=['Total', 'HP', 'Attack', 'Defence', 'Sp_attack', 'Sp_defence', 'Speed']):
-    df = pd.read_csv(path) # Source: https://www.kaggle.com/datasets/shubhamchambhare/pokemons-and-there-stats 
-    df[features] = df[features].fillna(0) # If any of the cells have a missing value it gets replaced by 0
-    return df[features].copy()
-
-# Normalization avoids overfitting because all features contribute equally to the model's learning process
-def normalize(data, new_min=1, new_max=10): 
-    return (data - data.min()) / (data.max() - data.min()) * (new_max - 1) + new_min
-
-class KMeans:
+class KMeansClustering:
     
-    def __init__(self, k=3, n_iters=100, n_features=7): # k is the number of clusters
-        self.k = k
+    def __init__(self, k=3, n_iters=100): 
+        self.k = k  # k is the number of clusters/centroids
         self.n_iters = n_iters
-        
-        # Each centroid represents the geometric mean of each cluster (central point)
-        self.centroids = np.random.uniform(low=1.0, high=10.1, size=(k, n_features)) 
       
-    @staticmethod
-    def euclidean_distance(p, q):
-        return np.sqrt(np.sum((p - q) ** 2))
-   
-    def predict(self, X): # We pass only X because K-means is a unsupervised algorithm
+    def fit(self, X): # We pass only X because K-means is an unsupervised algorithm
         self.X = X
-        self.samples, self.features = X.shape
+        self.labels = np.zeros(self.X.shape[0])
+        self.centroids = generate_centroids(self.X, self.k) 
         
-        # 1. Initialize random centroids
-        # 2. Label each point with the closest centroid
-        # 3. Compute the geometric mean of the points in each cluster to find the position of the respective centroid
-        # 4. Update the centroids
-        # 5. Repeat until convergence or max iterations
+        iterations = 0
+        old_centroids = np.zeros_like(self.centroids)
+        while iterations <= self.n_iters and not np.array_equal(old_centroids, self.centroids):
+            old_centroids = self.centroids.copy()  # Save the state of the centroids before we update them
+            self.labels = get_labels(self.X, self.centroids)  # Assign each point to the nearest centroid
+            
+            # Update each centroid to be the mean of the points assigned to it
+            for i in range(self.k):
+                points_assigned_to_centroid = self.X[self.labels == i]
+                if points_assigned_to_centroid.shape[0] > 0:
+                    # Compute the new centroid as the mean of the assigned points
+                    self.centroids[i] = points_assigned_to_centroid.mean(axis=0)
+                          
+            iterations += 1
         
-
-    
+        plot_with_pca(self.k, self.labels, self.centroids, self.X)
+        
+        return self.labels
