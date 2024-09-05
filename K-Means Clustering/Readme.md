@@ -57,16 +57,7 @@ Runs the clustering process by loading the Pokémon dataset and fitting the K-Me
    ```bash
    pip install numpy pandas matplotlib scikit-learn
 
-2. Download the dataset from [here](https://www.kaggle.com/datasets/shubhamchambhare/pokemons-and-there-stats)
-
-3. Execute:
+2. Execute:
 
    ```bash
    python main.py
-
-
-### Notes:
-- Ensure you include an example output image (`path-to-your-example-plot.png`) in the `README.md` file if you'd like to provide a visual reference for users.
-- You can customize the usage and description based on the way you want users to interact with your project.
-
-This `README.md` file covers the key elements of your project: dataset, methodology, how to run the project, and possible future improvements.
