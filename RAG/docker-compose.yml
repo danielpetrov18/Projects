@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - '11434:11434'
+    volumes:
+      - ollama:/root/.ollama
+    runtime: nvidia
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:cuda
+    container_name: open-webui
+    ports:
+      - '8080:8080'
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - NVIDIA_VISIBLE_DEVICES=all
+    depends_on:
+      - ollama
+    runtime: nvidia
+volumes:
+  ollama:
+  open-webui:
