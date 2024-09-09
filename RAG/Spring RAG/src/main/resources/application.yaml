@@ -9,10 +9,7 @@ spring:
         #   by adding a request specific Runtime Options to the Prompt call.
         options:
           model: llama3.1:8b # 8 billion parameters version.
-          temperature: 0.5 # Increasing the temperature will make the model answer more creatively.
-          # Making use of GPU (check out the ollama official docker image for further configs)
-          # Set according your hardware
-          num-gpu: 1
+          temperature: 0.7 # Increasing the temperature will make the model answer more creatively.
     vectorstore:
       chroma:
         client:

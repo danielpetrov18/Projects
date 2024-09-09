@@ -6,26 +6,7 @@ services:
       - '11434:11434'
     volumes:
       - ollama:/root/.ollama
-    runtime: nvidia
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434/health"]
-      interval: 30s
-      retries: 3
-      start_period: 20s
-      timeout: 10s
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:cuda
-    container_name: open-webui
-    ports:
-      - '8081:8081'
-    volumes:
-      - open-webui:/app/backend/data
-    environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - NVIDIA_VISIBLE_DEVICES=all
-    depends_on:
-      - ollama
-    runtime: nvidia
+
   chromadb:
     image: chromadb/chroma:0.5.6.dev71
     container_name: chromadb
@@ -37,8 +18,7 @@ services:
       - IS_PERSISTENT=TRUE
       - PERSIST_DIRECTORY=/chroma/data # Default folder where chroma stores data
       - ANONYMIZED_TELEMETRY=FALSE
-    depends_on:
-      - ollama
+  
   spring-boot:
     build:
       context: './Spring RAG'
@@ -46,8 +26,8 @@ services:
     container_name: spring-boot
     ports:
       - '8080:8080'
-    depends_on: 
-      - ollama
+    volumes:
+      - './Spring RAG/src:/app/src' # TODO: REMOVE AFTER FINISHED
+
 volumes:
   ollama:
-  open-webui:
