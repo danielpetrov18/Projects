@@ -28,6 +28,7 @@ services:
       - '8080:8080'
     volumes:
       - './Spring RAG/src:/app/src' # TODO: REMOVE AFTER FINISHED
+      - './Spring RAG/knowledge_base:/app/knowledge_base' # This is going to copy all the files into the container
 
 volumes:
   ollama:

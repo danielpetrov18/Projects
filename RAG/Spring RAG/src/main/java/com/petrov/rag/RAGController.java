@@ -22,6 +22,12 @@ public class RAGController {
         this.ragService = chatClient;
     }
 
+    @GetMapping(path = "/extractPdfData", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> extractPdfData() {
+        final String filesContent = ragService.extractPdfData();
+        return ResponseEntity.ok(filesContent);
+    }
+
     @GetMapping(path = "/prompt", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> prompt(@RequestParam(value="userPrompt") String userPrompt) {
         final String promptResponse = ragService.promptChatClient(userPrompt);

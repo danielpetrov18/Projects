@@ -1,4 +1,6 @@
 spring:
+  data:
+    pdf-data: knowledge_base  # This is where the pdf files will be kept (to be used as context for prompts).
   application:
     name: Spring RAG
   ai:
