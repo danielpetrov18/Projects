@@ -4,10 +4,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,17 +23,13 @@ public class RAGController {
         this.ragService = chatClient;
     }
 
-    @GetMapping(path = "/extractPdfData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> extractPdfData() {
-        final String filesContent = ragService.extractPdfData();
-        return ResponseEntity.ok(filesContent);
-    }
-
-    @GetMapping(path = "/prompt", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> prompt(@RequestParam(value="userPrompt") String userPrompt) {
-        final String promptResponse = ragService.promptChatClient(userPrompt);
-        System.out.println(String.format("** The user prompted: %s\nThe response was: %s**\n", userPrompt, promptResponse));
-        return new ResponseEntity<>(promptResponse, HttpStatus.OK);
+    @GetMapping(path = "/data", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getData() {
+        try {
+            return new ResponseEntity<>(ragService.getData(), HttpStatus.OK);
+        } catch(final IOException ioe) {
+            return new ResponseEntity<>(ioe.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
