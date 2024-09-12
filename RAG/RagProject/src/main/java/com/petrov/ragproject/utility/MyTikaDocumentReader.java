@@ -20,16 +20,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 
 @Component
-public class MyTikaDocumentReader implements IDocumentReader {
+public class MyTikaDocumentReader {
     
     @Value("${spring.data-folder}")
     private String filesPath;
-
     private final Logger LOGGER = LogManager.getLogger(this.getClass());
-
     private final static List<String> SUPPORTED_FILE_TYPES = List.of("pdf",".docx", ".pptx", ".html", ".txt", ".md");
 
-    @Override
     public List<Document> extractFilesData() throws IOException {
         final File filesFolder = new File(filesPath);
         if (!filesFolder.exists() || !filesFolder.isDirectory()) {

@@ -2,20 +2,27 @@ package com.petrov.ragproject.config;
 
 import javax.sql.DataSource;
 
-import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.ai.ollama.OllamaChatModel;
-import org.springframework.ai.ollama.OllamaEmbeddingModel;
-import org.springframework.ai.ollama.api.OllamaApi;
-import org.springframework.ai.ollama.api.OllamaOptions;
-import org.springframework.ai.vectorstore.PgVectorStore;
-import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ai.chat.client.ChatClient;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.boot.jdbc.DataSourceBuilder;
+
+import org.springframework.ai.embedding.EmbeddingModel;
+
+import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.PgVectorStore;
+
+import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.ai.ollama.api.OllamaApi;
+import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.ollama.api.OllamaOptions;
+import org.springframework.ai.ollama.OllamaEmbeddingModel;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class Config {
@@ -57,7 +64,7 @@ public class Config {
     @Bean
     public ChatClient chatClient(final ChatModel ollamaChatModel) {
         return ChatClient.create(ollamaChatModel);
-    }
+    }   
 
     @Bean
     public EmbeddingModel ollamaEmbeddingModel(final OllamaApi ollamaApi) {
